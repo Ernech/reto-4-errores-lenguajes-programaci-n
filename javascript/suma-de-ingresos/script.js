@@ -12,14 +12,15 @@ formIngresos.addEventListener("submit", (event) => {
     event.preventDefault();
     let formData = new FormData(event.target);
     ingresos.push({ id: ingresos.length + 1, ...Object.fromEntries(formData) });
-    console.log(ingresos);
     renderTableAndSetIngresoTotal()
 });
 
 
 const renderTableAndSetIngresoTotal = () => {
     tablaIngresos.innerHTML = '';
-    totalIngresos=0;
+    totalIngresos = 0;
+    totalIngresosOperativos = 0;
+    totalIngresosNoOperativos = 0;
     ingresos.forEach(ingreso => {
 
         const row = document.createElement("tr")
@@ -38,17 +39,17 @@ const renderTableAndSetIngresoTotal = () => {
 
         const editButton = document.createElement("button");
         editButton.textContent = "Editar";
-        editButton.classList.add("btn", "btn-warning","sm");
+        editButton.classList.add("btn", "btn-warning", "sm");
         editButton.addEventListener("click", () => editarIngreso(index));
 
-       
+
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Eliminar";
-        deleteButton.classList.add("btn", "btn-danger","sm");
+        deleteButton.classList.add("btn", "btn-danger", "sm");
         deleteButton.addEventListener("click", () => eliminarIngreso(ingreso.id));
 
 
-        const celdaAccion=document.createElement("td");
+        const celdaAccion = document.createElement("td");
         celdaAccion.appendChild(editButton)
         celdaAccion.appendChild(deleteButton);
         row.appendChild(celdaAccion)
@@ -56,21 +57,27 @@ const renderTableAndSetIngresoTotal = () => {
 
         tablaIngresos.appendChild(row)
 
-        totalIngresos+=Number(ingreso.ingreso)
+        totalIngresos += Number(ingreso.ingreso)
+        if (ingreso.tipoIngreso === 'Ingreso operativo') {
+            totalIngresosOperativos += Number(ingreso.ingreso);
+        } else {
+
+            totalIngresosNoOperativos += Number(ingreso.ingreso);
+        }
 
     })
-    console.log(totalIngresos);
-    totalIngresosElement.innerHTML=`Total: ${totalIngresos} USD.`;
+
+    totalIngresosElement.innerHTML = `Total: ${totalIngresos} USD.`;
 }
 
-const editarIngreso=(id)=>{
+const editarIngreso = (id) => {
 
 }
-const eliminarIngreso=(id)=>{
+const eliminarIngreso = (id) => {
 
-    ingresos = ingresos.filter(ingreso=>ingreso.id!=id);
+    ingresos = ingresos.filter(ingreso => ingreso.id != id);
     renderTableAndSetIngresoTotal();
-    
+
 }
 
 //Costos
@@ -93,7 +100,9 @@ formCostos.addEventListener("submit", (event) => {
 
 const renderTableAndSetCostoTotal = () => {
     tablaCostos.innerHTML = '';
-    totalCostos=0;
+    totalCostos = 0;
+    totalCostosOperativos = 0;
+    totalCostosNoOperativos = 0;
     costos.forEach(costo => {
 
         const row = document.createElement("tr")
@@ -112,17 +121,17 @@ const renderTableAndSetCostoTotal = () => {
 
         const editButton = document.createElement("button");
         editButton.textContent = "Editar";
-        editButton.classList.add("btn", "btn-warning","sm");
+        editButton.classList.add("btn", "btn-warning", "sm");
         editButton.addEventListener("click", () => editarCosto(index));
 
-       
+
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Eliminar";
-        deleteButton.classList.add("btn", "btn-danger","sm");
+        deleteButton.classList.add("btn", "btn-danger", "sm");
         deleteButton.addEventListener("click", () => eliminarCosto(costo.id));
 
 
-        const celdaAccion=document.createElement("td");
+        const celdaAccion = document.createElement("td");
         celdaAccion.appendChild(editButton)
         celdaAccion.appendChild(deleteButton);
         row.appendChild(celdaAccion)
@@ -130,24 +139,92 @@ const renderTableAndSetCostoTotal = () => {
 
         tablaCostos.appendChild(row)
 
-        totalCostos+=Number(costo.costo)
+        totalCostos += Number(costo.costo)
+        if (costo.tipoCosto === 'Costo operativo') {
+            totalCostosOperativos += Number(costo.costo);
+        } else {
+
+            totalCostosNoOperativos += Number(costo.costo);
+        }
 
     })
-    
-    totalCostosElement.innerHTML=`Total: ${totalCostos} USD.`;
+
+    totalCostosElement.innerHTML = `Total: ${totalCostos} USD.`;
 }
 
-const editarCosto=(id)=>{
+const editarCosto = (id) => {
 
 }
-const eliminarCosto=(id)=>{
+const eliminarCosto = (id) => {
 
-    costos = costos.filter(costo=>costo.id!=id);
+    costos = costos.filter(costo => costo.id != id);
     renderTableAndSetCostoTotal();
-    
+
 }
 
 
 //Calcular total
+let calculoTotalIngresos = 0;
+const ingresosTotalesElement = document.getElementById("ingresos-totales");
+const tablaIngresosTotales = document.querySelector("#tabla-ingresos-totales tbody");
 
+const calcularIngresosTotales = () => {
+    tablaIngresosTotales.innerHTML = '';
+    const rowIngresosOperativos = document.createElement("tr");
 
+    const detalleIngresosOperativos = document.createElement("td");
+    detalleIngresosOperativos.textContent = "Ingresos operativos";
+    rowIngresosOperativos.appendChild(detalleIngresosOperativos);
+
+    const totalIngresosOperativosCelda = document.createElement("td")
+    totalIngresosOperativosCelda.textContent = totalIngresosOperativos;
+    rowIngresosOperativos.appendChild(totalIngresosOperativosCelda);
+
+    tablaIngresosTotales.appendChild(rowIngresosOperativos)
+
+    const rowIngresosNoOperativos = document.createElement("tr");
+
+    const detalleIngresosNoOperativos = document.createElement("td");
+    detalleIngresosNoOperativos.textContent = "Ingresos no operativos";
+    rowIngresosNoOperativos.appendChild(detalleIngresosNoOperativos);
+
+    const totalIngresosNoOperativosCelda = document.createElement("td")
+    totalIngresosNoOperativosCelda.textContent = totalIngresosNoOperativos;
+    rowIngresosNoOperativos.appendChild(totalIngresosNoOperativosCelda);
+
+    tablaIngresosTotales.appendChild(rowIngresosNoOperativos);
+
+    const rowCostosOperativos = document.createElement("tr");
+
+    const detalleCostosOperativos = document.createElement("td");
+    detalleCostosOperativos.textContent = "Costos operativos";
+    rowCostosOperativos.appendChild(detalleCostosOperativos);
+
+    const totalCostosOperativosCelda = document.createElement("td")
+    totalCostosOperativosCelda.textContent = `-${totalCostosOperativos}`;
+    rowCostosOperativos.appendChild(totalCostosOperativosCelda);
+
+    tablaIngresosTotales.appendChild(rowCostosOperativos);
+
+    const rowCostosNoOperativos = document.createElement("tr");
+
+    const detalleCostosNoOperativos = document.createElement("td");
+    detalleCostosNoOperativos.textContent = "Costos no operativos";
+    rowCostosNoOperativos.appendChild(detalleCostosNoOperativos);
+
+    const totalCostosNoOperativosCelda = document.createElement("td")
+    totalCostosNoOperativosCelda.textContent = `-${totalCostosNoOperativos}`;
+    rowCostosNoOperativos.appendChild(totalCostosNoOperativosCelda);
+
+    tablaIngresosTotales.appendChild(rowCostosNoOperativos);
+
+    calculoTotalIngresos = Number(totalIngresosOperativos) + Number(totalIngresosNoOperativos) - Number(totalCostosOperativos) - Number(totalCostosNoOperativos);
+
+    ingresosTotalesElement.innerHTML = `Total ingresos: ${calculoTotalIngresos}`
+}
+
+const btnIngresosTotales = document.getElementById("btn-total")
+
+btnIngresosTotales.addEventListener("click", () => {
+    calcularIngresosTotales();
+})
