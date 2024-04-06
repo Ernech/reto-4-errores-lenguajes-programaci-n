@@ -24,18 +24,18 @@
                         <form id="form-ingresos" action="" method="POST">
                             <div class="form-group">
                                 <label for="tipoIngreso" class="form-label">Tipo de ingreso</label>
-                                <select name="tipoIngreso" id="tipo-ingreso" class="form-control">
-                                    <option value="ingreso-operativo">Ingresos operativos</option>
-                                    <option value="ingreso-no-operativo">Ingresos no operativos</option>
+                                <select name="tipoIngreso" id="tipoIngreso" class="form-control">
+                                    <option value="Ingreso operativo">Ingresos operativos</option>
+                                    <option value="Ingreso no Operativo">Ingresos no operativos</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="ingreso" class="form-label">Cantidad ingreso ($USD)</label>
-                                <input type="number" name="ingreso" class="form-control" min="0" />
+                                <input type="number" id="ingreso" name="ingreso" class="form-control" min="0" />
                             </div>
                             <input type="submit" value="Agregar ingreso" id="btn-nuevo-ingreso" class="btn btn-primary mt-3"/>
                         </form>
-                        <table class="table mt-4">
+                        <table class="table mt-4"v id="tabla-ingresos">
                             <thead>
                               <tr class="table-secondary">
                                 <th scope="col">#</th>
@@ -44,16 +44,11 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr class="table-light">
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                              
-                              </tr>
+                            
                             
                             </tbody>
                           </table>
-                          <p class="text-end">Total: 300</p>
+                          <p class="text-end" id="total-ingresos">Total: 0 USD.</p>
                     </div>
                 </div>
             </div>
