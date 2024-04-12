@@ -3,11 +3,19 @@ const counter = document.getElementById('counter');
 let count = 10;
 
 btnCount.addEventListener('click',async(event)=>{
-    while(count>=0){
-       
-        await new Promise(resolve => setTimeout(resolve, 1000)); 
+    
+    clearInterval(countdownInterval);
+    
+    count = 10;
+    
+    
+    countdownInterval = setInterval(() => {
         counter.textContent = count;
         count--;
         
-    }
+        if (count <= 0) {
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
+   
 });
