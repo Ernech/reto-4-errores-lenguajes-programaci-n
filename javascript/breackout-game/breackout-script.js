@@ -18,6 +18,7 @@ let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 let score = 0;
+let lives = 3;
 
 let bricks = [];
 for (let c = 0; c < brickColumnCount; c++) {
@@ -43,8 +44,18 @@ const keyUpHandler = (e) => {
     }
 }
 
+const mouseMoveHandler = (e)=>{
+
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if(relativeX>0 && relativeX<canvas.width){
+        paddleX = relativeX - paddleWidth/2;
+    }
+}
+
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove",mouseMoveHandler,false);
+
 
 const drawBall = () => {
     ctx.beginPath();
@@ -109,6 +120,12 @@ const drawScore = ()=>{
     ctx.fillText("Score: "+ score, 8, 20);
 }
 
+const drawLives = ()=>{
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65,20);
+}
+
 const draw = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
@@ -116,6 +133,7 @@ const draw = () => {
     drawBricks();
     collisionDetection();
     drawScore();
+    drawLives();
     if (x + dx < ballRadius || x + dx > canvas.width - ballRadius) {
         dx = -dx;
     }
@@ -125,8 +143,17 @@ const draw = () => {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
+          lives--;
+          if(!lives){
             alert("GAME OVER");
             document.location.reload();
+          }else{
+            x= canvas.width / 2;
+            y = canvas.height-30;
+            dx=2;
+            dy=-2;
+            paddleX = (canvas.width-paddleWidth)/2;
+          }
         }
 
     }
@@ -140,6 +167,7 @@ const draw = () => {
 
     x += dx;
     y += dy;
+    requestAnimationFrame(draw)
 
 }
 
@@ -147,6 +175,6 @@ const draw = () => {
 
 
 
-setInterval(draw, 10);
+draw();
 
 
