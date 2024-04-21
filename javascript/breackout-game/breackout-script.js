@@ -2,7 +2,7 @@ let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 let x = canvas.width / 2;
 let y = canvas.height - 30;
-let dx = 2
+let dx = 2;
 let dy = -2;
 let ballRadius = 10;
 let paddleHeight = 10;
@@ -44,18 +44,16 @@ const keyUpHandler = (e) => {
     }
 }
 
-const mouseMoveHandler = (e)=>{
-
+const mouseMoveHandler = (e) => {
     let relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX>0 && relativeX<canvas.width){
-        paddleX = relativeX - paddleWidth/2;
+    if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2;
     }
 }
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-document.addEventListener("mousemove",mouseMoveHandler,false);
-
+document.addEventListener("mousemove", mouseMoveHandler, false);
 
 const drawBall = () => {
     ctx.beginPath();
@@ -64,21 +62,19 @@ const drawBall = () => {
     ctx.fill();
     ctx.closePath();
 }
-const drawPaddle = () => {
 
+const drawPaddle = () => {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
-
 }
 
 const drawBricks = () => {
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
             if (bricks[c][r].status == 1) {
-
                 let brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
                 let brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
                 bricks[c][r].x = brickX;
@@ -94,36 +90,50 @@ const drawBricks = () => {
 }
 
 const collisionDetection = () => {
+    let ballTop = y - ballRadius;
+    let ballBottom = y + ballRadius;
+    let ballLeft = x - ballRadius;
+    let ballRight = x + ballRadius;
+
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
-            let b = bricks[c][r];
-            if (x > b.x && 
-                x < b.x + brickWidth &&
-                y > b.y && 
-                y < b.y + brickHeight
-            ) {
-                dy = -dy;
-                b.status=0;
-                score++;
-                if(score===brickRowCount * brickColumnCount){
-                    alert("YOU WIN, CONGRATULATIONS!");
-                    document.location.reload();
+            let brick = bricks[c][r];
+            if (brick.status == 1) {
+                let brickLeft = brick.x;
+                let brickRight = brick.x + brickWidth;
+                let brickTop = brick.y;
+                let brickBottom = brick.y + brickHeight;
+
+                if (
+                    ballRight > brickLeft &&
+                    ballLeft < brickRight &&
+                    ballBottom > brickTop &&
+                    ballTop < brickBottom
+                ) {
+                    dy = -dy;
+                    brick.status = 0;
+                    score++;
+
+                    if (score === brickRowCount * brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS!");
+                        document.location.reload();
+                    }
                 }
             }
         }
     }
 }
 
-const drawScore = ()=>{
-    ctx.font="16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: "+ score, 8, 20);
-}
-
-const drawLives = ()=>{
+const drawScore = () => {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
-    ctx.fillText("Lives: "+lives, canvas.width-65,20);
+    ctx.fillText("Score: " + score, 8, 20);
+}
+
+const drawLives = () => {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
 }
 
 const draw = () => {
@@ -134,6 +144,7 @@ const draw = () => {
     collisionDetection();
     drawScore();
     drawLives();
+
     if (x + dx < ballRadius || x + dx > canvas.width - ballRadius) {
         dx = -dx;
     }
@@ -143,19 +154,18 @@ const draw = () => {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
-          lives--;
-          if(!lives){
-            alert("GAME OVER");
-            document.location.reload();
-          }else{
-            x= canvas.width / 2;
-            y = canvas.height-30;
-            dx=2;
-            dy=-2;
-            paddleX = (canvas.width-paddleWidth)/2;
-          }
+            lives--;
+            if (!lives) {
+                alert("GAME OVER");
+                document.location.reload();
+            } else {
+                x = canvas.width / 2;
+                y = canvas.height - 30;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+            }
         }
-
     }
 
     if (rightPressed && paddleX < canvas.width - paddleWidth) {
@@ -164,17 +174,12 @@ const draw = () => {
         paddleX -= 7;
     }
 
-
     x += dx;
     y += dy;
-    requestAnimationFrame(draw)
 
+    if (lives > 0) {
+        requestAnimationFrame(draw);
+    }
 }
 
-
-
-
-
 draw();
-
-
