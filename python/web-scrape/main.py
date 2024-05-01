@@ -16,11 +16,13 @@ for article_tag in articles_tag:
         articles_texts.append(article_tag.find(name="a").getText())
         articles_links.append(article_tag.find(name="a").get("href"))
        
-articles_upvote= [score.getText() for score in soup.find_all(name="span", class_="score")]
-
-
-print(articles_texts)
-print(articles_links)
-print(articles_upvote)
+#articles_upvote= [score.getText() for score in soup.find_all(name="span", class_="score")]
+print("**********************************HACKER NEWS**********************************")
+print("===============================================================================")
+for i in range (0,len(articles_tag)):
+        print("----------------------------------------------------------------------")
+        print(f"Title: {articles_texts[i]}")
+        print(f"Link: {articles_links[i]}")
+       # print(f"Upvote: {articles_upvote[i]}")
 
 
