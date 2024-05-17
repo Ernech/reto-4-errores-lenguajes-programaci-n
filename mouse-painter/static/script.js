@@ -8,7 +8,7 @@ ctx.lineWidth=2;
 let fillValue = true;
 let strokeValue = false;
 let canvasData = {"pencil": [], "line": [], "rectangle": [], "circle": [], "eraser": []}
-
+const pencilButton = document.getElementById("penciltool")
 const pencil = ()=>{
 
     canvas.onmousedown = (e)=>{
@@ -41,6 +41,7 @@ const pencil = ()=>{
         canvasData.pencil.push({ "startx": prevX, "starty": prevY, "endx": curX, "endy": curY, "thick": ctx.lineWidth, "color": ctx.strokeStyle });
     }
 }
+
 function line(){
            
     canvas.onmousedown = function (e){
