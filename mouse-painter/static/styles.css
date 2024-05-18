@@ -1,3 +1,14 @@
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: auto;
+
+}
+#main-container{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 30% 70%;
+}
+
 #toolset {
     width     : 100px;
     height    : 440px;

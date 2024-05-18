@@ -90,10 +90,10 @@ function rectangle(){
             curX = e.clientX - canvas.offsetLeft - prevX;
             curY = e.clientY - canvas.offsetTop - prevY;
             ctx.strokeRect(prevX, prevY, curX, curY);
-            if (fill_value){
+            if (fillValue){
                 ctx.fillRect(prevX, prevY, curX, curY);
             }
-            canvasData.rectangle.push({ "starx": prevX, "stary": prevY, "width": curX, "height": curY, "thick": ctx.lineWidth, "stroke": stroke_value, "stroke_color": ctx.strokeStyle, "fill": fill_value, "fill_color": ctx.fillStyle });
+            canvasData.rectangle.push({ "starx": prevX, "stary": prevY, "width": curX, "height": curY, "thick": ctx.lineWidth, "stroke": strokeValue, "stroke_color": ctx.strokeStyle, "fill": fillValue, "fill_color": ctx.fillStyle });
             
         }
     };
@@ -126,10 +126,10 @@ function circle(){
             ctx.arc(Math.abs(curX + prevX)/2, Math.abs(curY + prevY)/2, Math.sqrt(Math.pow(curX - prevX, 2) + Math.pow(curY - prevY, 2))/2, 0, Math.PI * 2, true);
             ctx.closePath();
             ctx.stroke();
-            if (fill_value){
+            if (fillValue){
                ctx.fill();
             }
-            canvasData.circle.push({ "starx": prevX, "stary": prevY, "radius": curX - prevX, "thick": ctx.lineWidth, "stroke": stroke_value, "stroke_color": ctx.strokeStyle, "fill": fill_value, "fill_color": ctx.fillStyle });
+            canvasData.circle.push({ "starx": prevX, "stary": prevY, "radius": curX - prevX, "thick": ctx.lineWidth, "stroke": strokeValue, "stroke_color": ctx.strokeStyle, "fill": fillValue, "fill_color": ctx.fillStyle });
         }
     };
             

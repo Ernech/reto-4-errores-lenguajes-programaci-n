@@ -6,11 +6,8 @@
     <title>Paint app</title>
 </head>
 <body>
-    <div align="right">
-        <a href="/">Home</a>
-        |<a href="/save">Gallery</a>
-    </div>
-    <hr>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <h1>Paint App</h1>
     {% block content %}{% endblock %}
 </body>
 </html>

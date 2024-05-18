@@ -1,42 +1,40 @@
 {% include "index.html" %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <body onload="pencil()">
-        <p><h2 id="title">Paint App</h2></p>
-        <p><table>
-            <tr>
-            <td>
+        <p><div id="main-container">
+            <div>
                 <fieldset id="toolset">
                 <br>
                 <br>
-                <button id="penciltool" type="button" style="height: 25px; width: 100px;" onclick="pencil()">Pencil</button>
+                <button id="penciltool" type="button" style="height: 25px; width: 100px;" onclick="pencil()"><i class="fa-solid fa-pencil"></i>&nbsp;Pencil</button>
                 <br>
                 <br>
                 <br>
-                <button id="linetool" type="button" style="height: 25px; width: 100px;" onclick="line()">Line</button>
+                <button id="linetool" type="button" style="height: 25px; width: 100px;" onclick="line()"><i class="fa-solid fa-pen-line"></i>&nbsp;Line</button>
                 <br>
                 <br>
                 <br>
-                <button id="rectangletool" type="button" style="height: 25px; width: 100px;" onclick="rectangle()">Rectangle</button> 
+                <button id="rectangletool" type="button" style="height: 25px; width: 100px;" onclick="rectangle()"><i class="fa-regular fa-square"></i>&nbsp;Rectangle</button> 
                 <br>
                 <br>
                 <br>
-                <button id="circletool" type="button" style="height: 25px; width: 100px;" onclick="circle()">Circle</button> 
+                <button id="circletool" type="button" style="height: 25px; width: 100px;" onclick="circle()"><i class="fa-regular fa-circle"></i>&nbsp;Circle</button> 
                 <br>
                 <br>
                 <br>
-                <button id="erasertool" type="button" style="height: 25px; width: 100px;" onclick="eraser()">Eraser</button> 
+                <button id="erasertool" type="button" style="height: 25px; width: 100px;" onclick="eraser()"><i class="fa-solid fa-eraser"></i>&nbsp;Eraser</button> 
                 <br>
                 <br>
                 <br>
-                <button id="resettool" type="button" style="height: 25px; width: 100px;" onclick="reset()">Reset</button> 
+                <button id="resettool" type="button" style="height: 25px; width: 100px;" onclick="reset()"><i class="fa-solid fa-arrow-rotate-left"></i>&nbsp;Reset</button> 
                 </fieldset>
-            </td>
-            <td>
+            <div>
                 <canvas id="paint" width="750" height="450" style="border: 5px solid #000000;"></canvas>
-            </td>
-            </tr>
-        </table></p>
+            </div>
+            </div>
+        </div></p>
         <fieldset id="colorset">
         <table>
             <tr>
