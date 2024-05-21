@@ -6,28 +6,17 @@
         <p><div id="main-container">
             <div>
                 <fieldset id="toolset">
-                <br>
-                <br>
+               
                 <button id="penciltool" type="button" style="height: 25px; width: 100px;" onclick="pencil()"><i class="fa-solid fa-pencil"></i>&nbsp;Pencil</button>
-                <br>
-                <br>
-                <br>
-                <button id="linetool" type="button" style="height: 25px; width: 100px;" onclick="line()"><i class="fa-solid fa-pen-line"></i>&nbsp;Line</button>
-                <br>
-                <br>
-                <br>
+                
+                <button id="linetool" type="button" style="height: 25px; width: 100px;" onclick="line()"><i class="fa-solid fa-slash"></i>&nbsp;Line</button>
+               
                 <button id="rectangletool" type="button" style="height: 25px; width: 100px;" onclick="rectangle()"><i class="fa-regular fa-square"></i>&nbsp;Rectangle</button> 
-                <br>
-                <br>
-                <br>
+                
                 <button id="circletool" type="button" style="height: 25px; width: 100px;" onclick="circle()"><i class="fa-regular fa-circle"></i>&nbsp;Circle</button> 
-                <br>
-                <br>
-                <br>
+                
                 <button id="erasertool" type="button" style="height: 25px; width: 100px;" onclick="eraser()"><i class="fa-solid fa-eraser"></i>&nbsp;Eraser</button> 
-                <br>
-                <br>
-                <br>
+               
                 <button id="resettool" type="button" style="height: 25px; width: 100px;" onclick="reset()"><i class="fa-solid fa-arrow-rotate-left"></i>&nbsp;Reset</button> 
                 </fieldset>
             <div>
@@ -109,7 +98,8 @@
                 <td><button style="background-color: #7CFC00; height: 20px; width: 20px;" onclick="color('#7CFC00')"></button>
             </tr>
             <tr>
-                <td><label>Line Width</label></td>
+                <td><label>Line Width:</label></td>
+                <td><p id="lineWidth">0</p></td>
                 <td><button id="pixel_plus" type="button" onclick="add_pixel()" style="width: 25px;">+</button></td>
                 <td><button id="pixel_minus" type="button" onclick="reduce_pixel()" style="width: 25px;">-</button></td>
             </tr>

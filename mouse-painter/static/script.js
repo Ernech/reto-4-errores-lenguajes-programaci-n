@@ -8,7 +8,10 @@ ctx.lineWidth=2;
 let fillValue = true;
 let strokeValue = false;
 let canvasData = {"pencil": [], "line": [], "rectangle": [], "circle": [], "eraser": []}
+const lineWidth = document.getElementById("lineWidth")
+const lineWidthCount = 1
 const pencilButton = document.getElementById("penciltool")
+lineWidth.innerText=ctx.lineWidth
 const pencil = ()=>{
 
     canvas.onmousedown = (e)=>{
@@ -187,6 +190,7 @@ function color(colorValue){
         
 function add_pixel(){
     ctx.lineWidth += 1;
+    lineWidth.innerText=ctx.lineWidth;
 }
         
 function reduce_pixel(){
@@ -196,6 +200,7 @@ function reduce_pixel(){
     else{
         ctx.lineWidth -= 1;
     }
+    lineWidth.innerText=ctx.lineWidth;
 }
         
 function fill(){

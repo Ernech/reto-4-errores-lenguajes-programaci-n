@@ -16,6 +16,9 @@ h1{
     left      : 0px;
     top       : 50px; 
     background: #35d128;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #paint {
