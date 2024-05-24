@@ -12,7 +12,7 @@ const lineWidth = document.getElementById("lineWidth")
 const lineWidthCount = 1
 const pencilButton = document.getElementById("penciltool")
 const selectedColor = document.getElementById("selected-color")
-selectedColor.style=`background-color: #000000; height: 20px; width: 20px; border-width: 2px; border-style: outset; border-color: #000000; `;
+selectedColor.style=`background-color: #000000; height: 15px; width: 15px; border-width: 2px; border-style: outset; border-color: #000000; margin:0;`;
 lineWidth.innerText=ctx.lineWidth
 const pencil = ()=>{
 
@@ -188,7 +188,7 @@ function eraser(){
 function color(colorValue){
     ctx.strokeStyle = colorValue;
     ctx.fillStyle = colorValue;
-    selectedColor.style=`background-color: ${colorValue}; height: 20px; width: 20px; border-width: 2px; border-style: outset; border-color: #000000; `;
+    selectedColor.style=`background-color: ${colorValue}; height: 15px; width: 15px; border-width: 2px; border-style: outset; border-color: #000000; margin:0;`;
 }    
         
 function add_pixel(){
