@@ -6,8 +6,11 @@ class Contacto:
         self.numero = numero
 
     def agregar_contacto(self):
-        self.contactos.append(self)
-        print(f"El contacto {self.nombre} fue agregado con éxito")
+        if self.numero.isdigit():
+            self.contactos.append(self)
+            print(f"El contacto {self.nombre} fue agregado con éxito")
+        else:
+             print(f"El número de {self.nombre} es incorrecto")
 
     @classmethod
     def buscar_contacto(cls, nombre):
@@ -45,4 +48,5 @@ class Contacto:
             print("=====================================")
             print(f"Nombre {contacto.nombre}")
             print(f"Numero {contacto.numero}")
+        print("=====================================")
             
